@@ -93,14 +93,17 @@
   };
 </script>
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="本文只介绍Gradle于Java项目上的应用。  What is Gradle?Gradle与Ant、Maven一样，是一种构建工具，能自动化执行项目构建，并提供依赖管理的功能。与Ant、Maven相比，因为Gradle不像Maven那样为用户强行定义了项目周期，并且能自定义构建任务，所以Gradle具有更大的灵活性。 Java ProjectsGradle使用了约定优于配置的原则来构建基于JV">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Brief Introduction of Gradle">
 <meta property="og:url" content="https://yxmadoc.github.io/2019/07/20/Brief-Introduction-of-Gradle/index.html">
 <meta property="og:site_name" content="YxMadOC&#39;s">
+<meta property="og:description" content="本文只介绍Gradle于Java项目上的应用。  What is Gradle?Gradle与Ant、Maven一样，是一种构建工具，能自动化执行项目构建，并提供依赖管理的功能。与Ant、Maven相比，因为Gradle不像Maven那样为用户强行定义了项目周期，并且能自定义构建任务，所以Gradle具有更大的灵活性。 Java ProjectsGradle使用了约定优于配置的原则来构建基于JV">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-20T05:39:41.958Z">
+<meta property="og:updated_time" content="2019-07-20T14:37:52.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Brief Introduction of Gradle">
+<meta name="twitter:description" content="本文只介绍Gradle于Java项目上的应用。  What is Gradle?Gradle与Ant、Maven一样，是一种构建工具，能自动化执行项目构建，并提供依赖管理的功能。与Ant、Maven相比，因为Gradle不像Maven那样为用户强行定义了项目周期，并且能自定义构建任务，所以Gradle具有更大的灵活性。 Java ProjectsGradle使用了约定优于配置的原则来构建基于JV">
 
 
 
@@ -350,10 +353,14 @@
                 
               
 
-              <time title="创建时间：2019-07-20 13:39:41" itemprop="dateCreated datePublished" datetime="2019-07-20T13:39:41+08:00">2019-07-20</time>
+              <time title="创建时间：2019-07-20 13:39:41 / 修改时间：22:37:52" itemprop="dateCreated datePublished" datetime="2019-07-20T13:39:41+08:00">2019-07-20</time>
             </span>
           
 
+          
+            
+
+            
           
 
           
@@ -390,7 +397,65 @@
       
 
       
-        
+        <blockquote>
+<p>本文只介绍Gradle于Java项目上的应用。</p>
+</blockquote>
+<h2 id="What-is-Gradle"><a href="#What-is-Gradle" class="headerlink" title="What is Gradle?"></a>What is Gradle?</h2><p>Gradle与Ant、Maven一样，是一种构建工具，能自动化执行项目构建，并提供依赖管理的功能。与Ant、Maven相比，因为Gradle不像Maven那样为用户强行定义了项目周期，并且能自定义构建任务，所以Gradle具有更大的灵活性。</p>
+<h2 id="Java-Projects"><a href="#Java-Projects" class="headerlink" title="Java Projects"></a>Java Projects</h2><p>Gradle使用了<code>约定优于配置</code>的原则来构建基于JVM的项目，其中有些约定参考了Apache Maven。尤其是使用了与Maven项目相同的项目结构，并且Gradle可以兼容Maven仓库。</p>
+<h3 id="Convention-Over-Configuration"><a href="#Convention-Over-Configuration" class="headerlink" title="Convention-Over-Configuration"></a>Convention-Over-Configuration</h3><p>Convention-Over-Configuration即约定优于配置，以Gradle中的Java支持插件为例：</p>
+<p>得益于Java插件，你将可以执行以下任务：</p>
+<ul>
+<li><code>compileTask</code>： 用于编译 <strong>src/main/java</strong> 下的所有Java源文件</li>
+<li><code>compileTestJava</code>： 用于编译 <strong>src/test/java</strong> 下的所有Java源文件</li>
+<li><code>test</code>：用于执行 <strong>src/test/java</strong> 下的所有测试</li>
+<li><code>jar</code>: 将 <code>main</code> 目录下的所有已编译文件以及 <strong>src/main/resources</strong> 下的资源文件打包成&lt;项目名&gt;-&lt;版本号&gt;.jar</li>
+<li><code>javadoc</code>：将生成<code>main</code>目录下的所有文档</li>
+</ul>
+<p>上面提到的目录，如 <strong>src/main/java</strong> 和 <strong>src/test/java</strong> 以及 <strong>src/main/resources</strong> 都是Gradle<code>约定优于配置</code>原则的直接体现。当然，你也可以定义自己的Source目录，但除非有特殊需要，平时并不建议这么做。</p>
+<p>除Gradle之外，许多框架（如Spring Boot）也采用了这种原则，目的是为了方便开发者专注于开发，而不是花时间在繁琐的配置之上。</p>
+<h3 id="build-gradle"><a href="#build-gradle" class="headerlink" title="build.gradle"></a>build.gradle</h3><p>类似Maven中的pom.xml，Gradle通过build.gradle来定义构建任务以及引入依赖。下面是一个常见的build.gradle示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    ext &#123;</span><br><span class="line">        springBootVersion = &apos;2.0.3.RELEASE&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenCentral()</span><br><span class="line">        maven &#123; url &quot;https://plugins.gradle.org/m2/&quot; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath &quot;org.springframework.boot:spring-boot-gradle-plugin:$&#123;springBootVersion&#125;&quot;</span><br><span class="line">        classpath &apos;org.junit.platform:junit-platform-gradle-plugin:1.0.0&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">apply plugin: &apos;java&apos;</span><br><span class="line">apply plugin: &apos;idea&apos;</span><br><span class="line">apply plugin: &apos;org.springframework.boot&apos;</span><br><span class="line">apply plugin: &apos;io.spring.dependency-management&apos;</span><br><span class="line">apply plugin: &apos;org.junit.platform.gradle.plugin&apos;</span><br><span class="line"></span><br><span class="line">group = &apos;com.tw&apos;</span><br><span class="line">version = &apos;0.0.1-SNAPSHOT&apos;</span><br><span class="line">sourceCompatibility = 1.8</span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &apos;org.springframework.boot:spring-boot-starter-actuator&apos;</span><br><span class="line">    compile &apos;org.springframework.boot:spring-boot-starter-web&apos;</span><br><span class="line">    compile &apos;org.springframework.boot:spring-boot-starter-data-jpa&apos;</span><br><span class="line">    runtime &apos;com.h2database:h2:1.4.199&apos;</span><br><span class="line">    compile &apos;org.projectlombok:lombok:1.18.8&apos;</span><br><span class="line">    compile &apos;org.flywaydb:flyway-core:5.2.4&apos;</span><br><span class="line">    testCompile &apos;org.springframework.boot:spring-boot-starter-test&apos;</span><br><span class="line"></span><br><span class="line">    testImplementation(&apos;org.junit.jupiter:junit-jupiter-api:5.0.0&apos;)</span><br><span class="line">    testCompile(&apos;org.junit.jupiter:junit-jupiter-params:5.0.0&apos;)</span><br><span class="line">    testRuntime(&apos;org.junit.jupiter:junit-jupiter-engine:5.0.0&apos;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="buildScripts"><a href="#buildScripts" class="headerlink" title="buildScripts"></a>buildScripts</h4><p>在许多Gradle脚本中，经常能看见：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    ext &#123;</span><br><span class="line">        springBootVersion = &apos;2.0.3.RELEASE&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenCentral()</span><br><span class="line">        maven &#123; url &quot;https://plugins.gradle.org/m2/&quot; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath &quot;org.springframework.boot:spring-boot-gradle-plugin:$&#123;springBootVersion&#125;&quot;</span><br><span class="line">        classpath &apos;org.junit.platform:junit-platform-gradle-plugin:1.0.0&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>为什么要定义两次repositories，甚至dependencies？他们有什么不同？<br>其实，buildScripts是Gradle脚本本身所需要使用的依赖，因为Gradle脚本是基于Groovy DSL的，可以在脚本中引入第三方的库，就像我们编写Java代码一样。在buildScript外部的配置才是我们项目本身相关的配置。</p>
+</blockquote>
+<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: &apos;java&apos;</span><br><span class="line">apply plugin: &apos;idea&apos;</span><br><span class="line">apply plugin: &apos;org.springframework.boot&apos;</span><br><span class="line">apply plugin: &apos;io.spring.dependency-management&apos;</span><br><span class="line">apply plugin: &apos;org.junit.platform.gradle.plugin&apos;</span><br></pre></td></tr></table></figure>
+
+<p>plugins指的是Gradle中各种第三方插件，有了这些开箱即用的插件，我们可以省去许多配置。比如我们熟悉的<code>gradle bootRun</code> 以及 <code>gradle flyway</code>等都是由插件提供的快捷指令。</p>
+<h4 id="Project-Info"><a href="#Project-Info" class="headerlink" title="Project Info"></a>Project Info</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">group = &apos;com.tw&apos;</span><br><span class="line">version = &apos;0.0.1-SNAPSHOT&apos;</span><br><span class="line">sourceCompatibility = 1.8</span><br></pre></td></tr></table></figure>
+
+<p>上面三行是项目的相关信息，可以定义项目的组名、版本号、Java版本、名称等，更多项目信息配置项可以参考官方文档。</p>
+<h4 id="Repositories"><a href="#Repositories" class="headerlink" title="Repositories"></a>Repositories</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里定义的是依赖仓库地址，Gradle项目中默认会使用Maven中央仓库，但是这个仓库由于一些不可抗力的原因，能让一个小项目的Sync时间高达半个小时。所以这里建议换成国内的仓库地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maven &#123;url &apos;http://maven.aliyun.com/nexus/content/groups/public/&apos;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation &apos;org.springframework.boot:spring-boot-starter-actuator&apos;</span><br><span class="line">    implementation &apos;org.springframework.boot:spring-boot-starter-web&apos;</span><br><span class="line">    implementation &apos;org.springframework.boot:spring-boot-starter-data-jpa&apos;</span><br><span class="line">    runtimeOnly &apos;com.h2database:h2:1.4.199&apos;</span><br><span class="line">    implementation &apos;org.projectlombok:lombok:1.18.8&apos;</span><br><span class="line">    implementation &apos;org.flywaydb:flyway-core:5.2.4&apos;</span><br><span class="line">    testImplementation &apos;org.springframework.boot:spring-boot-starter-test&apos;</span><br><span class="line"></span><br><span class="line">    testImplementation(&apos;org.junit.jupiter:junit-jupiter-api:5.0.0&apos;)</span><br><span class="line">    testImplementation(&apos;org.junit.jupiter:junit-jupiter-params:5.0.0&apos;)</span><br><span class="line">    testRuntimeOnly(&apos;org.junit.jupiter:junit-jupiter-engine:5.0.0&apos;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里是Gradle的依赖管理部分，与Maven一样，Gradle也提供了几种常用的依赖作用范围：</p>
+<ul>
+<li><code>compileOnly</code>: 标注用于编译项目但不应该成为运行时环境的依赖</li>
+<li><code>implementation</code> (替换 <code>compile</code>)：标注用于项目编译过程以及运行时的依赖</li>
+<li><code>runtimeOnly</code> (替换 <code>runtime</code>)：标注只用于项目运行时的依赖<br>除此之外，还有 <code>testCompileOnly</code>, <code>testImplementation</code> 和 <code>testRuntimeOnly</code>，这三种与上面的并没有什么不同，只是他们作用于测试环境。</li>
+</ul>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>在Gradle中遇到如下常见问题，可以参考下面的方法解决：</p>
+<ul>
+<li><p>IDEA未识别Gradle项目<br>通常情况下，IDEA会自动把有build.gradle文件的项目识别为gradle项目，并且在index完成后会在右下角提示，要是手贱点掉了那个提示，可以通过以下方式解决：</p>
+<blockquote>
+<p>右键项目 -&gt; Open Module Settings -&gt; Facets -&gt; + -&gt; Java-Gradle -&gt; 选中项目目录</p>
+</blockquote>
+</li>
+<li><p>项目引入慢</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maven &#123;url &apos;http://maven.aliyun.com/nexus/content/groups/public/&apos;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>引入了依赖却无法引用<br>可能是引入依赖后没有Sync项目导致。可以打开IDEA最右边的Gradle选项卡，如果你没有找到，可以找到IDEA的顶部选项卡 <code>View -&gt; Tool Window Bars</code>，如果打开了还是没有，请查看该项目是不是已经被IDEA识别为Gradle项目。在打开Gradle选项卡后，选项卡左上角有个刷新图标，点击即可刷新项目引入依赖。在这里推荐打开Auto-Import，右键选项卡中的项目名称即可找到该选项。</p>
+</li>
+</ul>
+<p>若刷新项目后，还是无法引用依赖，请检查依赖的名称以及版本号是否有错误。可以到选项卡中的Source Sets检查。</p>
+
       
     </div>
 
@@ -476,8 +541,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -521,6 +595,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Gradle"><span class="nav-number">1.</span> <span class="nav-text">What is Gradle?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-Projects"><span class="nav-number">2.</span> <span class="nav-text">Java Projects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Convention-Over-Configuration"><span class="nav-number">2.1.</span> <span class="nav-text">Convention-Over-Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build-gradle"><span class="nav-number">2.2.</span> <span class="nav-text">build.gradle</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#buildScripts"><span class="nav-number">2.2.1.</span> <span class="nav-text">buildScripts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Plugins"><span class="nav-number">2.2.2.</span> <span class="nav-text">Plugins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Project-Info"><span class="nav-number">2.2.3.</span> <span class="nav-text">Project Info</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Repositories"><span class="nav-number">2.2.4.</span> <span class="nav-text">Repositories</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dependencies"><span class="nav-number">2.2.5.</span> <span class="nav-text">Dependencies</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips"><span class="nav-number">2.3.</span> <span class="nav-text">Tips</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
