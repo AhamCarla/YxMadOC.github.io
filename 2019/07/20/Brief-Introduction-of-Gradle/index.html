@@ -96,11 +96,11 @@
   <meta name="description" content="本文只介绍Gradle于Java项目上的应用。  What is Gradle?Gradle与Ant、Maven一样，是一种构建工具，能自动化执行项目构建，并提供依赖管理的功能。与Ant、Maven相比，因为Gradle不像Maven那样为用户强行定义了项目周期，并且能自定义构建任务，所以Gradle具有更大的灵活性。 Java ProjectsGradle使用了约定优于配置的原则来构建基于JV">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Brief Introduction of Gradle">
-<meta property="og:url" content="https://yxmadoc.github.io/2019/07/20/Brief-Introduction-of-Gradle/index.html">
+<meta property="og:url" content="https://yxmadoc.me/2019/07/20/Brief-Introduction-of-Gradle/index.html">
 <meta property="og:site_name" content="YxMadOC&#39;s">
 <meta property="og:description" content="本文只介绍Gradle于Java项目上的应用。  What is Gradle?Gradle与Ant、Maven一样，是一种构建工具，能自动化执行项目构建，并提供依赖管理的功能。与Ant、Maven相比，因为Gradle不像Maven那样为用户强行定义了项目周期，并且能自定义构建任务，所以Gradle具有更大的灵活性。 Java ProjectsGradle使用了约定优于配置的原则来构建基于JV">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-20T14:40:35.575Z">
+<meta property="og:updated_time" content="2019-07-21T01:45:57.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Brief Introduction of Gradle">
 <meta name="twitter:description" content="本文只介绍Gradle于Java项目上的应用。  What is Gradle?Gradle与Ant、Maven一样，是一种构建工具，能自动化执行项目构建，并提供依赖管理的功能。与Ant、Maven相比，因为Gradle不像Maven那样为用户强行定义了项目周期，并且能自定义构建任务，所以Gradle具有更大的灵活性。 Java ProjectsGradle使用了约定优于配置的原则来构建基于JV">
@@ -111,7 +111,7 @@
 
   
   
-  <link rel="canonical" href="https://yxmadoc.github.io/2019/07/20/Brief-Introduction-of-Gradle/">
+  <link rel="canonical" href="https://yxmadoc.me/2019/07/20/Brief-Introduction-of-Gradle/">
 
 
 
@@ -310,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yxmadoc.github.io/2019/07/20/Brief-Introduction-of-Gradle/">
+    <link itemprop="mainEntityOfPage" href="https://yxmadoc.me/2019/07/20/Brief-Introduction-of-Gradle/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YxMadOC">
@@ -353,13 +353,23 @@
                 
               
 
-              <time title="创建时间：2019-07-20 13:39:41 / 修改时间：22:40:35" itemprop="dateCreated datePublished" datetime="2019-07-20T13:39:41+08:00">2019-07-20</time>
+              <time title="创建时间：2019-07-20 13:39:41" itemprop="dateCreated datePublished" datetime="2019-07-20T13:39:41+08:00">2019-07-20</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-21 09:45:57" itemprop="dateModified" datetime="2019-07-21T09:45:57+08:00">2019-07-21</time>
+              </span>
             
           
 
@@ -422,7 +432,7 @@
 <blockquote>
 <p>为什么要定义两次repositories，甚至dependencies？他们有什么不同？</p>
 </blockquote>
-<p>其实，buildScripts是Gradle脚本本身所需要使用的依赖，因为Gradle脚本是基于Groovy DSL的，可以在脚本中引入第三方的库，就像我们编写Java代码一样。在buildScript外部的配置才是我们项目本身相关的配置。</p>
+<p>其实，buildScripts是Gradle脚本本身所需要使用的依赖，因为Gradle脚本是基于Groovy DSL的，可以在脚本中引入第三方的库，就像我们编写Java代码一样。另外，Gradle提供了一些开箱即用的任务，更多丰富的任务需要依赖第三方的插件，buildScript为这些第三方插件进行了元描述，定义了这些插件的ID，仓库源等，而buildScript外部的配置才是我们项目本身相关的配置。</p>
 <h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: &apos;java&apos;</span><br><span class="line">apply plugin: &apos;idea&apos;</span><br><span class="line">apply plugin: &apos;org.springframework.boot&apos;</span><br><span class="line">apply plugin: &apos;io.spring.dependency-management&apos;</span><br><span class="line">apply plugin: &apos;org.junit.platform.gradle.plugin&apos;</span><br></pre></td></tr></table></figure>
 
 <p>plugins指的是Gradle中各种第三方插件，有了这些开箱即用的插件，我们可以省去许多配置。比如我们熟悉的<code>gradle bootRun</code> 以及 <code>gradle flyway</code>等都是由插件提供的快捷指令。</p>
@@ -442,7 +452,7 @@
 <li><code>implementation</code> (替换 <code>compile</code>)：标注用于项目编译过程以及运行时的依赖</li>
 <li><code>runtimeOnly</code> (替换 <code>runtime</code>)：标注只用于项目运行时的依赖<br>除此之外，还有 <code>testCompileOnly</code>, <code>testImplementation</code> 和 <code>testRuntimeOnly</code>，这三种与上面的并没有什么不同，只是他们作用于测试环境。</li>
 </ul>
-<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><p>在Gradle中遇到如下常见问题，可以参考下面的方法解决：</p>
+<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>在Gradle中遇到如下常见问题，可以参考下面的方法解决：</p>
 <ul>
 <li><p>IDEA未识别Gradle项目<br>通常情况下，IDEA会自动把有build.gradle文件的项目识别为gradle项目，并且在index完成后会在右下角提示，要是手贱点掉了那个提示，可以通过以下方式解决：</p>
 <blockquote>
@@ -593,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Gradle"><span class="nav-number">1.</span> <span class="nav-text">What is Gradle?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-Projects"><span class="nav-number">2.</span> <span class="nav-text">Java Projects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Convention-Over-Configuration"><span class="nav-number">2.1.</span> <span class="nav-text">Convention-Over-Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build-gradle"><span class="nav-number">2.2.</span> <span class="nav-text">build.gradle</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#buildScripts"><span class="nav-number">2.2.1.</span> <span class="nav-text">buildScripts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Plugins"><span class="nav-number">2.2.2.</span> <span class="nav-text">Plugins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Project-Info"><span class="nav-number">2.2.3.</span> <span class="nav-text">Project Info</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Repositories"><span class="nav-number">2.2.4.</span> <span class="nav-text">Repositories</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dependencies"><span class="nav-number">2.2.5.</span> <span class="nav-text">Dependencies</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips"><span class="nav-number">2.3.</span> <span class="nav-text">Tips</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Gradle"><span class="nav-number">1.</span> <span class="nav-text">What is Gradle?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-Projects"><span class="nav-number">2.</span> <span class="nav-text">Java Projects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Convention-Over-Configuration"><span class="nav-number">2.1.</span> <span class="nav-text">Convention-Over-Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build-gradle"><span class="nav-number">2.2.</span> <span class="nav-text">build.gradle</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#buildScripts"><span class="nav-number">2.2.1.</span> <span class="nav-text">buildScripts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Plugins"><span class="nav-number">2.2.2.</span> <span class="nav-text">Plugins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Project-Info"><span class="nav-number">2.2.3.</span> <span class="nav-text">Project Info</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Repositories"><span class="nav-number">2.2.4.</span> <span class="nav-text">Repositories</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dependencies"><span class="nav-number">2.2.5.</span> <span class="nav-text">Dependencies</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tips"><span class="nav-number">3.</span> <span class="nav-text">Tips</span></a></li></ol></div>
             
 
           </div>
