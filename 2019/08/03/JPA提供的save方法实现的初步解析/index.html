@@ -93,18 +93,18 @@
   };
 </script>
 
-  <meta name="description" content="本文只介绍Gradle于Java项目上的应用。  What is Gradle?Gradle与Ant、Maven一样，是一种构建工具，能自动化执行项目构建，并提供依赖管理的功能。与Ant、Maven相比，因为Gradle不像Maven那样为用户强行定义了项目周期，并且能自定义构建任务，所以Gradle具有更大的灵活性。 Gradle for Java ProjectsGradle使用了约定优于配">
+  <meta name="description" content="Based on Spring version: 2.1.6.RELEASE  在使用Spring Data JPA时，通常会觉得这个框架很神奇，几乎为0的SQL代码量，实现几个简单的接口，并在其中自定义要执行查询的方法名，便可实现CRUD操作。本文将对最常用的方法之一——save方法的源码实现作简单的解析，对一些详细的实现细节暂不作讨论。 Repository要使用Spring Data JP">
 <meta name="keywords" content="Backend">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Brief Introduction of Gradle">
-<meta property="og:url" content="https://yxmadoc.github.io/2019/07/20/Brief-Introduction-of-Gradle/index.html">
+<meta property="og:title" content="JPA提供的save方法实现的初步解析">
+<meta property="og:url" content="https://yxmadoc.github.io/2019/08/03/JPA提供的save方法实现的初步解析/index.html">
 <meta property="og:site_name" content="YxMadOC&#39;s">
-<meta property="og:description" content="本文只介绍Gradle于Java项目上的应用。  What is Gradle?Gradle与Ant、Maven一样，是一种构建工具，能自动化执行项目构建，并提供依赖管理的功能。与Ant、Maven相比，因为Gradle不像Maven那样为用户强行定义了项目周期，并且能自定义构建任务，所以Gradle具有更大的灵活性。 Gradle for Java ProjectsGradle使用了约定优于配">
+<meta property="og:description" content="Based on Spring version: 2.1.6.RELEASE  在使用Spring Data JPA时，通常会觉得这个框架很神奇，几乎为0的SQL代码量，实现几个简单的接口，并在其中自定义要执行查询的方法名，便可实现CRUD操作。本文将对最常用的方法之一——save方法的源码实现作简单的解析，对一些详细的实现细节暂不作讨论。 Repository要使用Spring Data JP">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-21T12:53:02.920Z">
+<meta property="og:updated_time" content="2019-08-03T15:10:21.359Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Brief Introduction of Gradle">
-<meta name="twitter:description" content="本文只介绍Gradle于Java项目上的应用。  What is Gradle?Gradle与Ant、Maven一样，是一种构建工具，能自动化执行项目构建，并提供依赖管理的功能。与Ant、Maven相比，因为Gradle不像Maven那样为用户强行定义了项目周期，并且能自定义构建任务，所以Gradle具有更大的灵活性。 Gradle for Java ProjectsGradle使用了约定优于配">
+<meta name="twitter:title" content="JPA提供的save方法实现的初步解析">
+<meta name="twitter:description" content="Based on Spring version: 2.1.6.RELEASE  在使用Spring Data JPA时，通常会觉得这个框架很神奇，几乎为0的SQL代码量，实现几个简单的接口，并在其中自定义要执行查询的方法名，便可实现CRUD操作。本文将对最常用的方法之一——save方法的源码实现作简单的解析，对一些详细的实现细节暂不作讨论。 Repository要使用Spring Data JP">
 
 
 
@@ -112,7 +112,7 @@
 
   
   
-  <link rel="canonical" href="https://yxmadoc.github.io/2019/07/20/Brief-Introduction-of-Gradle/">
+  <link rel="canonical" href="https://yxmadoc.github.io/2019/08/03/JPA提供的save方法实现的初步解析/">
 
 
 
@@ -123,7 +123,7 @@
 </script>
 
   
-  <title>Brief Introduction of Gradle | YxMadOC's</title>
+  <title>JPA提供的save方法实现的初步解析 | YxMadOC's</title>
   
 
 
@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yxmadoc.github.io/2019/07/20/Brief-Introduction-of-Gradle/">
+    <link itemprop="mainEntityOfPage" href="https://yxmadoc.github.io/2019/08/03/JPA提供的save方法实现的初步解析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YxMadOC">
@@ -328,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Brief Introduction of Gradle
+          <h1 class="post-title" itemprop="name headline">JPA提供的save方法实现的初步解析
 
               
             
@@ -354,23 +354,13 @@
                 
               
 
-              <time title="创建时间：2019-07-20 13:39:41" itemprop="dateCreated datePublished" datetime="2019-07-20T13:39:41+08:00">2019-07-20</time>
+              <time title="创建时间：2019-08-03 21:59:50 / 修改时间：23:10:21" itemprop="dateCreated datePublished" datetime="2019-08-03T21:59:50+08:00">2019-08-03</time>
             </span>
           
 
           
             
 
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-21 20:53:02" itemprop="dateModified" datetime="2019-07-21T20:53:02+08:00">2019-07-21</time>
-              </span>
             
           
 
@@ -409,66 +399,32 @@
 
       
         <blockquote>
-<p>本文只介绍Gradle于Java项目上的应用。</p>
+<p>Based on Spring version: 2.1.6.RELEASE</p>
 </blockquote>
-<h2 id="What-is-Gradle"><a href="#What-is-Gradle" class="headerlink" title="What is Gradle?"></a>What is Gradle?</h2><p>Gradle与Ant、Maven一样，是一种构建工具，能自动化执行项目构建，并提供依赖管理的功能。与Ant、Maven相比，因为Gradle不像Maven那样为用户强行定义了项目周期，并且能自定义构建任务，所以Gradle具有更大的灵活性。</p>
-<h2 id="Gradle-for-Java-Projects"><a href="#Gradle-for-Java-Projects" class="headerlink" title="Gradle for Java Projects"></a>Gradle for Java Projects</h2><p>Gradle使用了<code>约定优于配置</code>的原则来构建基于JVM的项目，其中有些约定参考了Apache Maven。尤其是使用了与Maven项目相同的项目结构，并且Gradle可以兼容Maven仓库。</p>
-<h3 id="Convention-Over-Configuration"><a href="#Convention-Over-Configuration" class="headerlink" title="Convention-Over-Configuration"></a>Convention-Over-Configuration</h3><p>Convention-Over-Configuration即约定优于配置，以Gradle中的Java支持插件为例：</p>
-<p>得益于Java插件，你将可以执行以下任务：</p>
-<ul>
-<li><code>compileTask</code>： 用于编译 <strong>src/main/java</strong> 下的所有Java源文件</li>
-<li><code>compileTestJava</code>： 用于编译 <strong>src/test/java</strong> 下的所有Java源文件</li>
-<li><code>test</code>：用于执行 <strong>src/test/java</strong> 下的所有测试</li>
-<li><code>jar</code>: 将 <code>main</code> 目录下的所有已编译文件以及 <strong>src/main/resources</strong> 下的资源文件打包成&lt;项目名&gt;-&lt;版本号&gt;.jar</li>
-<li><code>javadoc</code>：将生成<code>main</code>目录下的所有文档</li>
-</ul>
-<p>上面提到的目录，如 <strong>src/main/java</strong> 和 <strong>src/test/java</strong> 以及 <strong>src/main/resources</strong> 都是Gradle<code>约定优于配置</code>原则的直接体现。当然，你也可以定义自己的Source目录，但除非有特殊需要，平时并不建议这么做。</p>
-<p>除Gradle之外，许多框架（如Spring Boot）也采用了这种原则，目的是为了方便开发者专注于开发，而不是花时间在繁琐的配置之上。</p>
-<h3 id="build-gradle"><a href="#build-gradle" class="headerlink" title="build.gradle"></a>build.gradle</h3><p>类似Maven中的pom.xml，Gradle通过build.gradle来定义构建任务以及引入依赖。下面是一个常见的build.gradle示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    ext &#123;</span><br><span class="line">        springBootVersion = &apos;2.0.3.RELEASE&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenCentral()</span><br><span class="line">        maven &#123; url &quot;https://plugins.gradle.org/m2/&quot; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath &quot;org.springframework.boot:spring-boot-gradle-plugin:$&#123;springBootVersion&#125;&quot;</span><br><span class="line">        classpath &apos;org.junit.platform:junit-platform-gradle-plugin:1.0.0&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">apply plugin: &apos;java&apos;</span><br><span class="line">apply plugin: &apos;idea&apos;</span><br><span class="line">apply plugin: &apos;org.springframework.boot&apos;</span><br><span class="line">apply plugin: &apos;io.spring.dependency-management&apos;</span><br><span class="line">apply plugin: &apos;org.junit.platform.gradle.plugin&apos;</span><br><span class="line"></span><br><span class="line">group = &apos;com.tw&apos;</span><br><span class="line">version = &apos;0.0.1-SNAPSHOT&apos;</span><br><span class="line">sourceCompatibility = 1.8</span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    compile &apos;org.springframework.boot:spring-boot-starter-actuator&apos;</span><br><span class="line">    compile &apos;org.springframework.boot:spring-boot-starter-web&apos;</span><br><span class="line">    compile &apos;org.springframework.boot:spring-boot-starter-data-jpa&apos;</span><br><span class="line">    runtime &apos;com.h2database:h2:1.4.199&apos;</span><br><span class="line">    compile &apos;org.projectlombok:lombok:1.18.8&apos;</span><br><span class="line">    compile &apos;org.flywaydb:flyway-core:5.2.4&apos;</span><br><span class="line">    testCompile &apos;org.springframework.boot:spring-boot-starter-test&apos;</span><br><span class="line"></span><br><span class="line">    testImplementation(&apos;org.junit.jupiter:junit-jupiter-api:5.0.0&apos;)</span><br><span class="line">    testCompile(&apos;org.junit.jupiter:junit-jupiter-params:5.0.0&apos;)</span><br><span class="line">    testRuntime(&apos;org.junit.jupiter:junit-jupiter-engine:5.0.0&apos;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在使用Spring Data JPA时，通常会觉得这个框架很神奇，几乎为0的SQL代码量，实现几个简单的接口，并在其中自定义要执行查询的方法名，便可实现CRUD操作。本文将对最常用的方法之一——save方法的源码实现作简单的解析，对一些详细的实现细节暂不作讨论。</p>
+<h1 id="Repository"><a href="#Repository" class="headerlink" title="Repository"></a>Repository</h1><p>要使用Spring Data JPA，除了要定义实体，还有一件必须做的事情就是创建Repository接口，并继承JPA提供的<code>JpaRepository</code>接口了，在继承该接口时，我们会定义该接口所管理的实体类型以及实体的ID数据类型。</p>
+<h2 id="CrudRepository"><a href="#CrudRepository" class="headerlink" title="CrudRepository"></a>CrudRepository</h2><p>往上追溯<code>JpaRepository</code>会发现，该接口又继承了<code>PagingAndSortingRepository</code>和<code>QueryByExampleExecutor</code>接口，<code>QueryByExampleExecutor</code>是通过Example执行条件查询的执行器，本文不作讨论。继续追溯<code>PagingAndSortingRepository</code>接口，发现其又继承了<code>CrudRepository</code>接口，通过阅读其中定义的方法，可以得知该接口是JPA所有Repository的最基本的方法定义（增删查改）。</p>
+<h3 id="SimpleJpaRepository"><a href="#SimpleJpaRepository" class="headerlink" title="SimpleJpaRepository"></a>SimpleJpaRepository</h3><p>在<code>CrudRepository</code>中，我们发现了该接口的唯一实现类：<code>SimpleJpaRepository</code>，在该类中我们找到了save的实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Transactional</span><br><span class="line">public &lt;S extends T&gt; S save(S entity) &#123;</span><br><span class="line"></span><br><span class="line">    if (entityInformation.isNew(entity)) &#123;</span><br><span class="line">        em.persist(entity);</span><br><span class="line">        return entity;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return em.merge(entity);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="buildScripts"><a href="#buildScripts" class="headerlink" title="buildScripts"></a>buildScripts</h4><p>在许多Gradle脚本中，经常能看见：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line">    ext &#123;</span><br><span class="line">        springBootVersion = &apos;2.0.3.RELEASE&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenCentral()</span><br><span class="line">        maven &#123; url &quot;https://plugins.gradle.org/m2/&quot; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dependencies &#123;</span><br><span class="line">        classpath &quot;org.springframework.boot:spring-boot-gradle-plugin:$&#123;springBootVersion&#125;&quot;</span><br><span class="line">        classpath &apos;org.junit.platform:junit-platform-gradle-plugin:1.0.0&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从此不难看出，save方法神奇的地方：“不存在则新增，存在则更新”的实现原理。该方法通过调用<code>entityInformation</code>的isNew方法，判断该实体是否为新实体，若是则执行EntityManager的persist方法（新增操作），反之则执行merge方法（更新操作）。</p>
+<h4 id="EntityInformation"><a href="#EntityInformation" class="headerlink" title="EntityInformation"></a>EntityInformation</h4><p>顾名思义，<code>EntityInformation</code>是提供实体信息的工具，在SimpleJpaRepository中作为构造器参数被传入。在本文的实验情况中，程序调用了该类的实现类<code>JpaMetamodelEntityInformation</code>，该类实现了isNew方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public boolean isNew(T entity) &#123;</span><br><span class="line"></span><br><span class="line">    if (!versionAttribute.isPresent()</span><br><span class="line">            || versionAttribute.map(Attribute::getJavaType).map(Class::isPrimitive).orElse(false)) &#123;</span><br><span class="line">        return super.isNew(entity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    BeanWrapper wrapper = new DirectFieldAccessFallbackBeanWrapper(entity);</span><br><span class="line"></span><br><span class="line">    return versionAttribute.map(it -&gt; wrapper.getPropertyValue(it.getName()) == null).orElse(true);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>为什么要定义两次repositories，甚至dependencies？他们有什么不同？</p>
-</blockquote>
-<p>其实，buildScripts是Gradle脚本本身所需要使用的依赖，因为Gradle脚本是基于Groovy DSL的，可以在脚本中引入第三方的库，就像我们编写Java代码一样。另外，Gradle提供了一些开箱即用的任务，更多丰富的任务需要依赖第三方的插件，buildScript为这些第三方插件进行了元描述，定义了这些插件的ID，仓库源等，而buildScript外部的配置才是我们项目本身相关的配置。</p>
-<h4 id="Plugins"><a href="#Plugins" class="headerlink" title="Plugins"></a>Plugins</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: &apos;java&apos;</span><br><span class="line">apply plugin: &apos;idea&apos;</span><br><span class="line">apply plugin: &apos;org.springframework.boot&apos;</span><br><span class="line">apply plugin: &apos;io.spring.dependency-management&apos;</span><br><span class="line">apply plugin: &apos;org.junit.platform.gradle.plugin&apos;</span><br></pre></td></tr></table></figure>
+<p>上述代码中的versionAttribute属性是有关数据库乐观锁的实现，由于本文的测试数据并没有定义version列，故不作讨论。该方法中调用了父类<code>AbstractEntityInformation</code>的isNew实现，在该父类实现中，判断是否为新实体的逻辑较为清晰：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public boolean isNew(T entity) &#123;</span><br><span class="line"></span><br><span class="line">    ID id = getId(entity);</span><br><span class="line">    Class&lt;ID&gt; idType = getIdType();</span><br><span class="line"></span><br><span class="line">    if (!idType.isPrimitive()) &#123;</span><br><span class="line">        return id == null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (id instanceof Number) &#123;</span><br><span class="line">        return ((Number) id).longValue() == 0L;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    throw new IllegalArgumentException(String.format(&quot;Unsupported primitive id type %s!&quot;, idType));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>plugins指的是Gradle中各种第三方插件，有了这些开箱即用的插件，我们可以省去许多配置。比如我们熟悉的<code>gradle bootRun</code> 以及 <code>gradle flyway</code>等都是由插件提供的快捷指令。</p>
-<h4 id="Project-Info"><a href="#Project-Info" class="headerlink" title="Project Info"></a>Project Info</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">group = &apos;com.tw&apos;</span><br><span class="line">version = &apos;0.0.1-SNAPSHOT&apos;</span><br><span class="line">sourceCompatibility = 1.8</span><br></pre></td></tr></table></figure>
+<p>该方法先是提取了当前实体的ID与ID类型，在判断其是否为包装类型，若是包装类型，继续判断id是否为null，若是，则为新实体。</p>
+<h3 id="EntityManager"><a href="#EntityManager" class="headerlink" title="EntityManager"></a>EntityManager</h3><p><code>EntityManager</code>接口是JPA标准的体现，在这里定义了各种对数据的操作行为，如persist, merge, find等，Hibernate提供的该接口的实现类是<code>SessionImpl</code>。Hibernate在此实现了<code>EntityManager</code>的行为，对于save方法，主要涉及到的就是persist和merge两个方法，这两个方法有多种重载，下面只涉及其中的一种。</p>
+<h4 id="persist"><a href="#persist" class="headerlink" title="persist"></a>persist</h4><p>persist方法的实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void persist(Object object) throws HibernateException &#123;</span><br><span class="line">    checkOpen();</span><br><span class="line">    firePersist( new PersistEvent( null, object, this ) );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>上面三行是项目的相关信息，可以定义项目的组名、版本号、Java版本、名称等，更多项目信息配置项可以参考官方文档。</p>
-<h4 id="Repositories"><a href="#Repositories" class="headerlink" title="Repositories"></a>Repositories</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在方法体中，checkOpen()方法是检测当前数据库会话是否打开，实现的关键是firePersist方法，该方法的参数是Hibernate封装的PersistEvent类。PersistEvent封装了当前传入的实体以及数据源信息，为firePersist方法提供了执行操作所必要的条件。在更深层的firePesist方法，Hibernate进行了更为细节的操作，如检查事务，懒加载实现，与数据库交互等，其中使用了较多设计模式，解析起来比较复杂。</p>
+<h4 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h4><p>merge方法的实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public Object merge(Object object) throws HibernateException &#123;</span><br><span class="line">    checkOpen();</span><br><span class="line">    return fireMerge( new MergeEvent( null, object, this ));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这里定义的是依赖仓库地址，Gradle项目中默认会使用Maven中央仓库，但是这个仓库由于一些不可抗力的原因，能让一个小项目的Sync时间高达半个小时。所以这里建议换成国内的仓库地址：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">maven &#123;url &apos;http://maven.aliyun.com/nexus/content/groups/public/&apos;&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation &apos;org.springframework.boot:spring-boot-starter-actuator&apos;</span><br><span class="line">    implementation &apos;org.springframework.boot:spring-boot-starter-web&apos;</span><br><span class="line">    implementation &apos;org.springframework.boot:spring-boot-starter-data-jpa&apos;</span><br><span class="line">    runtimeOnly &apos;com.h2database:h2:1.4.199&apos;</span><br><span class="line">    implementation &apos;org.projectlombok:lombok:1.18.8&apos;</span><br><span class="line">    implementation &apos;org.flywaydb:flyway-core:5.2.4&apos;</span><br><span class="line">    testImplementation &apos;org.springframework.boot:spring-boot-starter-test&apos;</span><br><span class="line"></span><br><span class="line">    testImplementation(&apos;org.junit.jupiter:junit-jupiter-api:5.0.0&apos;)</span><br><span class="line">    testImplementation(&apos;org.junit.jupiter:junit-jupiter-params:5.0.0&apos;)</span><br><span class="line">    testRuntimeOnly(&apos;org.junit.jupiter:junit-jupiter-engine:5.0.0&apos;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里是Gradle的依赖管理部分，与Maven一样，Gradle也提供了几种常用的依赖作用范围：</p>
-<ul>
-<li><code>compileOnly</code>: 标注用于编译项目但不应该成为运行时环境的依赖</li>
-<li><code>implementation</code> (替换 <code>compile</code>)：标注用于项目编译过程以及运行时的依赖</li>
-<li><code>runtimeOnly</code> (替换 <code>runtime</code>)：标注只用于项目运行时的依赖<br>除此之外，还有 <code>testCompileOnly</code>, <code>testImplementation</code> 和 <code>testRuntimeOnly</code>，这三种与上面的并没有什么不同，只是他们作用于测试环境。</li>
-</ul>
-<h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>在Gradle中遇到如下常见问题，可以参考下面的方法解决：</p>
-<ul>
-<li><p>IDEA未识别Gradle项目<br>通常情况下，IDEA会自动把有build.gradle文件的项目识别为gradle项目，并且在index完成后会在右下角提示，要是手贱点掉了那个提示，可以通过以下方式解决：</p>
-<blockquote>
-<p>右键项目 -&gt; Open Module Settings -&gt; Facets -&gt; + -&gt; Java-Gradle -&gt; 选中项目目录</p>
-</blockquote>
-</li>
-<li><p>项目引入慢</p>
-<blockquote>
-<p>maven {url ‘<a href="http://maven.aliyun.com/nexus/content/groups/public/&#39;}" target="_blank" rel="noopener">http://maven.aliyun.com/nexus/content/groups/public/&#39;}</a></p>
-</blockquote>
-</li>
-<li><p>引入了依赖却无法引用<br>可能是引入依赖后没有Sync项目导致。可以打开IDEA最右边的Gradle选项卡，如果你没有找到，可以找到IDEA的顶部选项卡 <code>View -&gt; Tool Window Bars</code>，如果打开了还是没有，请查看该项目是不是已经被IDEA识别为Gradle项目。在打开Gradle选项卡后，选项卡左上角有个刷新图标，点击即可刷新项目引入依赖。在这里推荐打开Auto-Import，右键选项卡中的项目名称即可找到该选项。</p>
-</li>
-</ul>
-<p>若刷新项目后，还是无法引用依赖，请检查依赖的名称以及版本号是否有错误。可以到选项卡中的Source Sets检查。</p>
+<p>merge方法以及fireMerge方法的实现与persist类似。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>可以看出，对于传入save方法的实体执行新增操作还是更新操作，Spring Data只是简单地判断了该实体的ID是否为空。相比persist操作，merge操作的实现还是比较复杂，希望以后能弄明白onPersist等方法的执行逻辑。</p>
 
       
     </div>
@@ -512,15 +468,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/07/24/速推CI-CD/" rel="next" title="速推CI/CD">
+                <i class="fa fa-chevron-left"></i> 速推CI/CD
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/24/速推CI-CD/" rel="prev" title="速推CI/CD">
-                速推CI/CD <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -644,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-Gradle"><span class="nav-number">1.</span> <span class="nav-text">What is Gradle?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle-for-Java-Projects"><span class="nav-number">2.</span> <span class="nav-text">Gradle for Java Projects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Convention-Over-Configuration"><span class="nav-number">2.1.</span> <span class="nav-text">Convention-Over-Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build-gradle"><span class="nav-number">2.2.</span> <span class="nav-text">build.gradle</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#buildScripts"><span class="nav-number">2.2.1.</span> <span class="nav-text">buildScripts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Plugins"><span class="nav-number">2.2.2.</span> <span class="nav-text">Plugins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Project-Info"><span class="nav-number">2.2.3.</span> <span class="nav-text">Project Info</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Repositories"><span class="nav-number">2.2.4.</span> <span class="nav-text">Repositories</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dependencies"><span class="nav-number">2.2.5.</span> <span class="nav-text">Dependencies</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tips"><span class="nav-number">3.</span> <span class="nav-text">Tips</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Repository"><span class="nav-number">1.</span> <span class="nav-text">Repository</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CrudRepository"><span class="nav-number">1.1.</span> <span class="nav-text">CrudRepository</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SimpleJpaRepository"><span class="nav-number">1.1.1.</span> <span class="nav-text">SimpleJpaRepository</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#EntityInformation"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">EntityInformation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EntityManager"><span class="nav-number">1.1.2.</span> <span class="nav-text">EntityManager</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#persist"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">persist</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#merge"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">merge</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
